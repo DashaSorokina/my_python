@@ -4,10 +4,10 @@ import json
 def from_json(): #экспортируем список из json файла
     data=[]
     try:
-        with open('file.json','r') as file: #открываем файл для чтения
-            text=file.read() #читаем файл
+        with open('file.json','r') as file: 
+            text=file.read() 
             if (text!=''):
-                parseJson=json.loads(text) #преобразование в словарь
+                parseJson=json.loads(text) 
                 data=parseJson['tasks'] #список словарей
             file.close()
     except IOError: #если нет файла
@@ -33,14 +33,15 @@ def write_json(): #записываем в json файл новую задачу
         }
         json.dump(text,file) #преобразование словаря в текстовый вид в json формате в переменную file
         file.close()
-    show()
+    
 
 def show():
     s = ''
     for i in from_json():
         s+='Задача:{0} Категория:{1} Время:{2}\n'.format(i['task'],i['category'],i['time'])
     tasks_list.config(text=s)
-
+def ex():
+    exit()
 window=tkinter.Tk()
 window.geometry('400x300')
 
@@ -70,7 +71,7 @@ button_show=tkinter.Button(window, text='Список задач',command=show)
 button_show.place(x=10,y=180)
 button_clean=tkinter.Button(window, text='Очистить весь список',command=create_delete_datafile)
 button_clean.place(x=10,y=210)
-button_ex=tkinter.Button(window, text='Выход',command=window.destroy)
+button_ex=tkinter.Button(window, text='Выход',command=ex)
 button_ex.place(x=10,y=240)
 
 window.mainloop()
